@@ -1,19 +1,18 @@
 // Variables
 const resetBtn = document.querySelector('#reset');
-const box = document.querySelector('.box');
+const boxes = document.querySelectorAll('.box');
 
 // Event Listeners
-box.addEventListener('click', turnRed);
+boxes.forEach(function(box, index){addEventListener('click', toggleColor)});
 resetBtn.addEventListener('click', clearGrid);
 
 // Functions
-function turnRed(e)
+function toggleColor(e)
 {
-    console.log("Changing to RED.");
     const element = e.target;
-    console.dir(element);
-    element.style.backgroundColor = 'red';
-    
+    const color = e.target.classList.color;
+    console.log(color);
+    element.classList.toggle('red'); 
 }
 
 function clearGrid(e)
