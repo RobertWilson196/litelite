@@ -1,10 +1,13 @@
 // Variables
 const resetBtn = document.querySelector('#reset');
 const boxes = document.querySelectorAll('.box');
+const gridSizeForm = document.querySelector('#grid-size');
+const main =  document.querySelector('main');
 
 // Event Listeners
 boxes.forEach(function(box, index){addEventListener('click', toggleColor)});
 resetBtn.addEventListener('click', clearGrid);
+gridSizeForm.addEventListener('submit',changeGrid);
 
 // Functions
 function toggleColor(e)
@@ -32,4 +35,22 @@ function clearGrid(e)
 {
     console.log("Clearing the Grid.")
     boxes.forEach((box,index)=>{box.classList.remove('red')})
+}
+
+function changeGrid(e) 
+{
+    e.preventDefault();
+    const gridSizeValue = +gridSizeFor.querySelector('input:checked').value;
+    const grid = makeGrid(gridSizeForm);
+    main.innerHTML = ' '; // this clears the main area
+    main.appendChild(grid); //dynamically added a grid element
+
+}
+
+function makegrid(size) 
+{
+    const element = document.createElement('h1');
+    element.textContent = 'GRID';
+    return element;
+
 }
