@@ -54,6 +54,7 @@ function makeGrid(size)
             console.log(i);
             const box = document.createElement('div');
             box.classList.add('box');
+            box.classList.add('white');
             box.addEventListener('click', toggleColor);
             column.appendChild(box);
         }    
@@ -62,34 +63,38 @@ function makeGrid(size)
     return rows;
 }
 
-function getColor(e)
-{
-    let color = document.getElementById.style.background;
-}
-
 function toggleColor(e)
 {
-const element = e.target;
-let color = document.getse
+    const element = e.target;
 
-if(color == 'green')
-{
-    console.log("green");
-    element.classList.add('green');
-}  
-else if(color == 'blue')
-{
-    console.log("blue");
-    element.classList.add('blue');
-}
-else if(color == 'red')
-{
-    console.log("red");
-    element.classList.add('red');
-}
-else {
-    element.classList.remove('red');
-    element.classList.remove('blue');
-    element.classList.remove('green');
-}
+    if(element.classList.contains('white'))
+    {
+        console.log("white -> red");
+        element.classList.remove('white');
+        element.classList.add('red');
+    }  
+    else if(element.classList.contains('red'))
+    {
+        console.log("red -> blue");
+        element.classList.remove('red');
+        element.classList.add('blue');
+    }
+    else if(element.classList.contains('blue'))
+    {
+        console.log("blue -> green");
+        element.classList.remove('blue');
+        element.classList.add('green');
+    }
+    else if(element.classList.contains('green'))
+    {
+        console.log("green -> white");
+        element.classList.remove('green');
+        element.classList.add('white');
+    }
+    else {
+        element.classList.remove('red');
+        element.classList.remove('blue');
+        element.classList.remove('green');
+        element.classList.add('white');
+    }
 }
