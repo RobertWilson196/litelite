@@ -2,10 +2,13 @@
 const resetBtn = document.querySelector('#reset');
 const gridSizeForm = document.querySelector('#grid-size');
 const main =  document.querySelector('main');
+const useColorBtn = document.querySelector('#use-color-picker');
+const colorPicker = document.querySelector('#color-picker');
 
 // Event Listeners
 resetBtn.addEventListener('click', clearGrid);
 gridSizeForm.addEventListener('submit',changeGrid);
+// useColorBtn.addEventListener('click', toggleColorPicker);
 
 // Initialize
 
@@ -13,6 +16,24 @@ changeGrid();
 
 // Functions
 
+// function toggleColorPicker(e)
+// {
+//     if(useColorBtn.checked)
+//     {
+//         console.log('testColorPicker ON');
+//         const boxes = document.querySelectorAll('.box');
+//         boxes.forEach((box,index)=>{box.removeEventListener('click', toggleColor)});
+//         boxes.forEach((box,index)=>{box.addEventListener('click', useColorPicker)});
+//     }
+//     else if(!useColorBtn.checked)
+//     {
+//         console.log('testColorPicker OFF');
+//         const boxes = document.querySelectorAll('.box');
+//         boxes.forEach((box,index)=>{box.removeEventListener('click', useColorPicker)});
+//         boxes.forEach((box,index)=>{box.addEventListener('click', toggleColor)});
+//     }
+    
+// }
 
 function clearGrid(e)
 {
@@ -21,12 +42,14 @@ function clearGrid(e)
     boxes.forEach((box,index)=>{box.classList.remove('red')});
     boxes.forEach((box,index)=>{box.classList.remove('blue')});
     boxes.forEach((box,index)=>{box.classList.remove('green')});
+    boxes.forEach((box,index)=>{box.classList.add('white')});
 }
 
 function changeGrid(e){
     if(e){
         e.preventDefault();
     }
+    document.getElementById("use-color-picker").checked = false;
     const gridSizeValue = +gridSizeForm.querySelector('input:checked').value;
     const grid = makeGrid(gridSizeValue);
     // set the main to the grid
@@ -55,12 +78,40 @@ function makeGrid(size)
             const box = document.createElement('div');
             box.classList.add('box');
             box.classList.add('white');
-            box.addEventListener('click', toggleColor);
+            box.addEventListener('click', useColorPicker);
             column.appendChild(box);
         }    
         rows.push(row);
     }
     return rows;
+}
+
+function useColorPicker(e)
+{
+    const element = e.target;
+    const customColor = colorPicker.value;
+
+    if(useColorBtn.checked)
+    {
+        if (element.style.backgroundColor = customColor)
+        {
+            console.log('clear');
+            element.style.backgroundColor = "";
+        }
+        
+        if(!element.style.backgroundColor)
+        {
+            console.log('color');
+            element.style.backgroundColor = customColor;
+        }   
+    }
+    else 
+    {
+        toggleColor(e);
+    }
+
+
+    
 }
 
 function toggleColor(e)
@@ -88,10 +139,7 @@ function toggleColor(e)
     else if(element.classList.contains('green'))
     {
         console.log("green -> white");
-        element.classList.remove('green');
-        element.classList.add('white');
-    }
-    else {
+        element.style.backgroundColor = "";
         element.classList.remove('red');
         element.classList.remove('blue');
         element.classList.remove('green');
